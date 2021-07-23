@@ -1,5 +1,5 @@
 {
-  "name": "archive-viewer",
+	"name": "archive-viewer",
 	"displayName": "Archive Viewer",
 	"description": "List content of archive files",
 	"version": "0.0.1",
@@ -10,7 +10,7 @@
 		"Other"
 	],
 	"activationEvents": [
-        "onCommand:archive-viewer.helloWorld"
+		"onCommand:archive-viewer.helloWorld"
 	],
 	"main": "./dist/extension.js",
 	"contributes": {
@@ -47,5 +47,8 @@
 		"ts-loader": "^9.2.2",
 		"webpack": "^5.38.1",
 		"webpack-cli": "^4.7.0"
+	},
+	"dependencies": {
+		"vsce": "^1.96.1"
 	}
 }
