@@ -1,22 +1,12 @@
 import * as vscode from 'vscode';
-import * as execa from 'execa';
+import { viewFile } from './viewer';
 
 export class ArchiveViewContentProvider
     implements vscode.TextDocumentContentProvider {
 
     static readonly scheme = 'archive-viewer';
 
-    private _onDidChange = new vscode.EventEmitter<vscode.Uri>();
-
-    dispose() {
-        this._onDidChange.dispose();
-    }
-
-    get onDidChange() {
-        return this._onDidChange.event;
-    }
-
-    // TODO support cancel, long operations
+    // TODO support cancel
     async provideTextDocumentContent(uri: vscode.Uri, cancelToken: vscode.CancellationToken): Promise<string> {
         var fileUri: vscode.Uri;
         try {
@@ -32,41 +22,9 @@ export class ArchiveViewContentProvider
 
         const filename = fileUri.path;
 
-        const content = await exec('lesspipe', filename);
-        if (content) {
-            return content;
-        }
-
-        const filetype = await getFileType(filename);
-
-        return getContent(filetype, filename);
-
-        // TODO support long operations?
+        return viewFile(filename);
     }
 
-}
-
-async function exec(...command: string[]): Promise<string> {
-    const head = command.shift();
-    if (!head) {
-        return "errror - no command provided";
-    }
-    const { stdout } = await execa(head, command);
-    return stdout;
-
-}
-
-async function getFileType(filename: string): Promise<string> {
-    return exec('file', '-b', '--mime-type', filename);
-}
-
-async function getContent(mimetype: string, filename: string): Promise<string> {
-
-    if (mimetype === 'application/zip') {
-        return exec('unzip', '-l', filename);
-    }
-
-    return "this file is a " + mimetype;
 }
 
 export function getViewUri(uri: vscode.Uri): vscode.Uri {

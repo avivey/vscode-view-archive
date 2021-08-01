@@ -8,7 +8,6 @@ export function activate(context: vscode.ExtensionContext) {
 
 	const viewer = new ArchiveViewContentProvider();
 
-	d(viewer);
 	d(vscode.workspace.registerTextDocumentContentProvider(ArchiveViewContentProvider.scheme, viewer));
 
 	d(vscode.commands.registerCommand('archive-viewer.view-file', async (resource: vscode.Uri) => {
