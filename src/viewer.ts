@@ -21,8 +21,12 @@ async function exec(...command: string[]): Promise<string> {
     if (!head) {
         return "error - no command provided";
     }
-    const { stdout } = await execa(head, command);
-    return stdout;
+    try {
+        const { stdout } = await execa(head, command);
+        return stdout;
+    } catch {
+        return 'ERROR INVOKING ' + head;
+    }
 
 }
 
