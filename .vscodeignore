@@ -1,6 +1,7 @@
 .vscode/**
 .vscode-test/**
 .arc*
+.gitmodules
 .pinterest-linters/
 out/**
 node_modules/**
@@ -15,4 +16,5 @@ src/**
 **/*.txt
 **/*.vsix
 TODO
+NOTES
 **/*.sh

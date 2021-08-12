@@ -2,6 +2,7 @@
 	"name": "archive-viewer",
 	"displayName": "Archive Viewer",
 	"description": "List content of archive files",
+	"publisher": "avive",
 	"version": "0.0.1",
 	"engines": {
 		"vscode": "^1.58.0"
@@ -27,6 +28,10 @@
 				}
 			]
 		}
+	},
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/avivey/vscode-view-archive.git"
 	},
 	"scripts": {
 		"vscode:prepublish": "npm run package",
